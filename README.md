@@ -18,7 +18,7 @@ Kerberos and OAuth2 Flows usage / KDC cert and key.
 - Needs support to EKU Client Authentication 1.3.6.1.5.5.7.3.2. Clients will be able to create signed JTWs that can be validated in Ory Hydra
 - PKI with OCSP and CRL support is pre-requirement
 - Ory ecosystem needs to be configured to trust the self-signed PKI
-- testing [XiPKI - eXtensible sImple Public Key Infrastructure](https://github.com/xipki/xipki) and [dogtagpki Certificate System](https://www.dogtagpki.org/)
+- testing [XiPKI - eXtensible sImple Public Key Infrastructure](https://github.com/xipki/xipki) with [H2 database](https://www.h2database.com/html/main.html)
 - OBS: JSON Web Signature (JWS) [RFC 7515](https://datatracker.ietf.org/doc/html/rfc7515). Attentions in ["x5u" (X.509 URL) Header Parameter](https://datatracker.ietf.org/doc/html/rfc7515#section-4.1.5) and ["x5c" (X.509 Certificate Chain) Header Parameter](https://datatracker.ietf.org/doc/html/rfc7515#section-4.1.6)
 
 ## Kerberos delegation

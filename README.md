@@ -6,18 +6,20 @@
 - KDC with: in-memory, Mavibot(MVCC BTree) or JSON backends to store data (principals and keys).
 - Preauth mechanism using JWT or PKI mechanism to request TGT and Service-Tickets.
 
-**kerby-instruments**: https://github.com/mesb/kerby-instruments
+**[kerby-instruments](https://github.com/mesbrj/kerby-instruments):**
 - Java spring boot REST API for Apache Kerby.
 - Remote Kerberos administration, management, instrumentation, metrics and telemetry.
 - user principals gnupg vault: user principals key-pairs (gnupg) - Encryption for user data (users are able to decide if the private key will be stored here or not).
 - realm vault: kerby-instruments svc key pairs (gnupg) / keyPurposeClientAuth/Client Authentication (user principals) x.509 certs (and private keys) only for 
 Kerberos and OAuth2 Flows usage / KDC cert and key.
-- Realm constrained delegation based in users signed JWTs
+- Realm constrained delegation based in users signed JWTs.
 >**Self-signed private PKI embedded on Kerby-instruments:** 
 - Needs supports to PKINIT EKUs keyPurposeKdc 1.3.6.1.5.2.3.5, keyPurposeClientAuth 1.3.6.1.5.2.3.4 and [some unusual fields for client certs and KDC cert](https://web.mit.edu/Kerberos/krb5-1.12/doc/admin/pkinit.html). Will be used to user authenticate with X.509 certificates (no need of keytabs or passwords inputs)
 - Needs support to EKU Client Authentication 1.3.6.1.5.5.7.3.2. Clients will be able to create signed JTWs that can be validated in Ory Hydra
-- Needs support JSON Web Signature (JWS) [RFC 7515](https://datatracker.ietf.org/doc/html/rfc7515). Attentions in ["x5u" (X.509 URL) Header Parameter](https://datatracker.ietf.org/doc/html/rfc7515#section-4.1.5) and ["x5c" (X.509 Certificate Chain) Header Parameter](https://datatracker.ietf.org/doc/html/rfc7515#section-4.1.6)
-- Ory ecosystem needs to be configured to trust the self-signed PKI.
+- PKI with OCSP and CRL support is pre-requirement
+- Ory ecosystem needs to be configured to trust the self-signed PKI
+- testing [XiPKI - eXtensible sImple Public Key Infrastructure](https://github.com/xipki/xipki) and [dogtagpki Certificate System](https://www.dogtagpki.org/)
+- OBS: JSON Web Signature (JWS) [RFC 7515](https://datatracker.ietf.org/doc/html/rfc7515). Attentions in ["x5u" (X.509 URL) Header Parameter](https://datatracker.ietf.org/doc/html/rfc7515#section-4.1.5) and ["x5c" (X.509 Certificate Chain) Header Parameter](https://datatracker.ietf.org/doc/html/rfc7515#section-4.1.6)
 
 ## Kerberos delegation
 

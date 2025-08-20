@@ -52,6 +52,17 @@ The kerby-instruments will generate and validate the user-principal JWT via Clie
 Here we achieved a constrained delegation in a *"FORWARDABLE + OK-AS-DELEGATE level"* without using the kerberos protocol or data structures from Kerberos tickets.
 The kerby-instruments (a KDC extension service) can act on-behalf of the user without user interaction and can apply policies on delegation requests, but in a *"FORWARDABLE + OK-AS-DELEGATE level"*. When the service principal get the user principal JWT, it can be used to request a TGT and service-tickets (for any another service-principal) on-behalf of the user.
 
+## Custom instrumentation and telemetry
+
+This project (GNU GPL3) includes the Apache Kerby (Apache License 2.0) Kerberos library and implementation (KDC and tools) and aims to provide one product with all the above features.
+
+The remote (on the fly) administration (service administration not user/server principals or cert management) are achieved via HTTPS (authenticated Kerberos) administrative endpoints and all configuration aspects (including the PKI, DBs, logging, telemetry) are instrumented through these endpoints.
+
+As a product, kerby-instruments aims to provide a comprehensive solution for Kerberos authentication and delegation, integrating seamlessly with customer existing infrastructure. The telemetry data needs to be easy to instrument, access and analyze, and the interoperability with existing systems and standards is a key.
+HTTP SSE for telemetry stream, /metrics endpoint for Prometheus and API routes for generic HTTP client pulling. These three options are provided for flexibility and ease of integration.
+
+The telemetry data needs to reflect the system's usage info beyond performance metrics. This includes user activity (how many authentications via cert, JWT, password), access patterns (delegations, cert issuance), and etc...
+
 ## Positive points about Kerberos
 
 - **Service Session key** - Each client/server connection has its own session key, providing per-connection security (each Kerberos client connected to a MariaDB has its own session key, for example).

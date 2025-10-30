@@ -46,8 +46,7 @@ This project (GNU GPL3) includes the Apache Kerby (Apache License 2.0) Kerberos 
 
 The remote (on the fly) administration (service administration not user/server principals or cert management) are achieved via HTTPS (authenticated Kerberos) administrative endpoints and all configuration aspects (including the PKI, DBs, logging, telemetry) are instrumented through these endpoints.
 
-As a product, kerby-instruments aims to provide a comprehensive solution for Kerberos authentication and delegation, integrating seamlessly with customer existing infrastructure. The telemetry data needs to be easy to instrument, access and analyze, and the interoperability with existing systems and standards is a key.
-HTTP SSE for telemetry stream, /metrics endpoint for Prometheus and API routes for generic HTTP client pulling. These three options are provided for flexibility and ease of integration.
+Krb-Cert aims to provide a comprehensive solution for Kerberos authentication and delegation, integrating seamlessly with customer existing infrastructure. The telemetry data needs to be easy to instrument, access and analyze, and the interoperability with existing systems and standards is a key. HTTP SSE for telemetry stream, /metrics endpoint for Prometheus and API routes for generic HTTP client pulling. These three options are provided for flexibility and ease of integration.
 
 The telemetry data needs to reflect the system's usage info beyond performance metrics. This includes user activity (how many authentications via cert, JWT, password), access patterns (delegations, cert issuance), and etc...
 

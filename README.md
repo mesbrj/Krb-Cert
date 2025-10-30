@@ -6,7 +6,7 @@
 - KDC with: in-memory, Mavibot(MVCC BTree) or JSON backends to store data (principals and keys).
 - Preauth mechanism using JWT or PKI mechanism to request TGT and Service-Tickets.
 
-**[kerby-instruments](https://github.com/mesbrj/kerby-instruments):**
+**[Krb-Cert](https://github.com/mesbrj/Krb-Cert):**
 - Java spring boot REST API for Apache Kerby.
 - Remote Kerberos administration, management, instrumentation, metrics and telemetry.
 - user principals gnupg vault: user principals key-pairs (gnupg) - Encryption for user data (users are able to decide if the private key will be stored here or not).
@@ -38,19 +38,7 @@ Expected behavior using *FORWARDABLE* ticket tag:
 Microsoft extended the Kerberos delegation capabilities with a [Constrained Delegation Protocol](https://learn.microsoft.com/en-us/windows-server/security/kerberos/kerberos-constrained-delegation-overview) known as [Service for User (S4U)](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-sfu/3bff5864-8135-400e-bdd9-33b552051d94)
 
 The book-looker-realm will face the Kerberos delegation as follow:
-
-- **Non-Java servers (service principals)**: Default Kerberos V5 behavior via delegation ticket tags. [Kerby KDC supports](https://github.com/apache/directory-kerby/blob/trunk/kerby-kerb/kerb-server/src/main/java/org/apache/kerby/kerberos/kerb/server/KdcConfigKey.java): PROXIABLE_ALLOWED and FORWARDABLE_ALLOWED. Unconstrained delegation (without OK-AS-DELEGATE flag) in a *"FORWARDABLE level"*.
-
-- **Java servers (service principals)**: kerby-instruments *kerby realm alternative constrained delegation*, using user-principals signed JWTs.
-
-## kerby realm alternative constrained delegation:
-
-The kerby-instruments HTTPS (Kerberos authenticated) endpoints for delegation services, needs to be used for service principals (servers) needing to authenticate on-behalf of users.
-
-The kerby-instruments will generate and validate the user-principal JWT via Client Credentials flow and will use a changed JWT with the correct claims. After all policy validations, the delegation can be processed (if the case) and the JWT will be sended as a cryptographic text material to the service principal. The service principal will use the KrbClient (Apache Kerby lib) and request (on-behalf a user via decrypted JWT) a service-ticket for the other service-principal.
-![](docs/alternative-constrained-delegation.png)
-Here we achieved a constrained delegation in a *"FORWARDABLE + OK-AS-DELEGATE level"* without using the kerberos protocol or data structures from Kerberos tickets.
-The kerby-instruments (a KDC extension service) can act on-behalf of the user without user interaction and can apply policies on delegation requests, but in a *"FORWARDABLE + OK-AS-DELEGATE level"*. When the service principal get the user principal JWT, it can be used to request a TGT and service-tickets (for any another service-principal) on-behalf of the user.
+- Default Kerberos V5 behavior via delegation ticket tags. [Kerby KDC supports](https://github.com/apache/directory-kerby/blob/trunk/kerby-kerb/kerb-server/src/main/java/org/apache/kerby/kerberos/kerb/server/KdcConfigKey.java): PROXIABLE_ALLOWED and FORWARDABLE_ALLOWED. Unconstrained delegation (without OK-AS-DELEGATE flag) in a *"FORWARDABLE level"*.
 
 ## Custom instrumentation and telemetry
 
